@@ -17,12 +17,13 @@ class Posts(db.Model):
     title = db.Column(db.String(100))
     body = db.Column(db.Text())
     date = db.Column(db.DateTime, default = datetime.datetime.now)
+    completed = db.Column(db.Boolean, default=False)
     def __init__(self, title, body):
         self.title = title
         self.body = body
 class PostSchema(ma.Schema):
     class Meta:
-        fields = ('id','title','body','date')
+        fields = ('id','title','body','date','completed')
 
 Post_schema = PostSchema()
 Posts_schema = PostSchema(many=True)
@@ -61,6 +62,13 @@ def update_Post(id):
     body = request.json['body']
     Post.title = title
     Post.body = body
+    db.session.commit()
+    return Post_schema.jsonify(Post)
+
+@app.route('/complete/<id>/', methods=['PUT'])
+def complete_post(id):
+    Post = Posts.query.get(id)
+    Post.completed = not Post.completed
     db.session.commit()
     return Post_schema.jsonify(Post)
 

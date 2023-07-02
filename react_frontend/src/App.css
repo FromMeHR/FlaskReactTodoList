@@ -9,7 +9,19 @@
 .hor-line {
   width: 50%;
   margin: auto;
-} 
+}
+.post-text { 
+  word-wrap: break-word;
+  max-width: 1020px;
+  margin: auto;
+}
+.completed {
+  text-decoration: line-through;
+}
+.circle {
+  width: 25px;
+  height: 25px;
+}
 
 /* .App-logo {
   height: 40vmin;

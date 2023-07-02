@@ -24,8 +24,17 @@ export default class APIService {
             'method': 'DELETE',
             headers: {
             'Content-Type': 'application/json'
-            }
+            },
           })
           .then(resp => resp.json())
+    }
+    static UpdateCompleted(id) {
+      return fetch(`http://127.0.0.1:5000/complete/${id}/`, {
+            'method': 'PUT',
+            headers: {
+            'Content-Type': 'application/json'
+            }
+           })
+          .then(resp => resp.json());
     }
 }
